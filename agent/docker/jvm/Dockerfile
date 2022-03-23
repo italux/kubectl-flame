@@ -11,7 +11,7 @@ RUN echo deb http://deb.debian.org/debian stretch-backports main > /etc/apt/sour
 RUN git clone https://github.com/edeNFed/async-profiler.git
 RUN cd async-profiler && make
 
-FROM bitnami/minideb:stretch
+FROM bitnami/minideb:bullseye
 RUN mkdir -p /app/async-profiler/build
 COPY --from=agentbuild /go/bin/agent /app
 COPY --from=asyncprofiler /async-profiler/build /app/async-profiler/build
