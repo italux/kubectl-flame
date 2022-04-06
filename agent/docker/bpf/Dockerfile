@@ -8,7 +8,7 @@ ADD . /go/src/github.com/VerizonMedia/kubectl-flame
 RUN go get -d -v ./...
 RUN cd agent && go build -o /go/bin/agent
 
-FROM alpine as builder
+FROM alpine:3.15.4 as builder
 COPY --from=ksrc /kernel-dev.tar /
 RUN tar xf /kernel-dev.tar -C /
 RUN mv /usr/src/*/ /usr/src/kernel-source/
@@ -16,7 +16,7 @@ RUN apk add git
 RUN git clone https://github.com/brendangregg/FlameGraph
 RUN git clone https://gist.github.com/edeNFed/83a9438156288661e2283c28fee18b8b bcc-profiler
 
-FROM alpine
+FROM alpine:3.15.4
 COPY --from=builder /usr/src /usr/src
 RUN apk add bcc-tools perl
 RUN ln -s $(which python3) /usr/bin/python
