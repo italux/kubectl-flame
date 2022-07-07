@@ -9,7 +9,7 @@ RUN apk add build-base git linux-headers
 RUN git clone https://github.com/edeNFed/async-profiler.git
 RUN cd async-profiler && make
 
-FROM alpine:3.15
+FROM alpine:3.16
 RUN mkdir -p /app/async-profiler/build
 COPY --from=agentbuild /go/bin/agent /app
 COPY --from=asyncprofiler /async-profiler/build /app/async-profiler/build
